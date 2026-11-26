@@ -1,0 +1,18 @@
+package helper
+
+import "github.com/gofiber/fiber/v2"
+
+func Success(c *fiber.Ctx, status int, message string, data any) error {
+	return c.Status(status).JSON(fiber.Map{
+		"success": true,
+		"message": message,
+		"data":    data,
+	})
+}
+
+func Fail(c *fiber.Ctx, status int, message string) error {
+	return c.Status(status).JSON(fiber.Map{
+		"success": false,
+		"message": message,
+	})
+}
