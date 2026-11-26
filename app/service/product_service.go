@@ -12,3 +12,10 @@ type productService struct {
 func NewProductService(repo model.ProductRepository) model.ProductService {
 	return &productService{repo: repo}
 }
+
+func (s *productService) validate(p *model.Product) error {
+	if p.SKU == "" || p.Name == "" || p.Price < 0 || p.Stock < 0 {
+		return model.ErrInvalidProductInput
+	}
+	return nil
+}
